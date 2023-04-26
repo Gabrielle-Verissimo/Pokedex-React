@@ -1,0 +1,29 @@
+.div-all {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 505px;
+    /* margin-top: 30px; */
+    padding-top: 6px;
+    overflow: hidden;
+    /* border: solid 1px black; */
+    overflow-y: auto;
+}
+
+.div-all::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+}
+
+.div-all::-webkit-scrollbar-track {
+    background: #81D4FA ;     /* color of the tracking area */
+  
+}
+
+.div-all::-webkit-scrollbar-thumb {
+    background-color: white;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #81D4FA ; /* creates padding around scroll thumb */
+}
