@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-
 const api = axios.create({
     baseURL: 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
 })
@@ -12,9 +11,16 @@ export function useFetch() {
     useEffect(() => {
         api.get()
             .then(response => {
-                const urls = response.data.results.map((item) => item.url);        
-                const url = fetch(urls); 
-                setData(url); 
+                const urls = response.data.results.map((item) => item.url);
+                const info = [];
+                // for(let i = 0; i < 10; i++) {
+                //     axios.get(urls[i])
+                //         .then(response => {
+                //             info.push(response.data)
+                //         })
+                //         .catch(e => console.log(e))
+                // } 
+                setData(info); 
             })
             .catch(e => console.log(e))
             .finally(() => setIsLoading(false))
@@ -24,15 +30,11 @@ export function useFetch() {
 }
 
 function fetch(urls) {
-    let url = [];
+    const url = [];
     for(let i = 0; i < 10; i++) {
-        axios.get(urls[i])
-            .then(response => url.push(response.data))
-            .catch(e => console.log(e))
-    }
-    // urls.map(item => {
+        url.push(urls[i]);
+    } 
 
-    // })
+    console.log(url);
 
-    return url;
 }

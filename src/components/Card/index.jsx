@@ -7,14 +7,16 @@ function Card(props) {
         <>
             <div className="card" id={props.id}>
                 <img src={props.img} alt="" />
-                <span>{props.id}</span>
+                <span>#{props.id}</span>
                 <h1>{props.name}</h1>
                 <div>
                     <h2>Tipo:</h2>
-                    <ul id="list-types">
+                    {props.children}
+                    {/* <ul id="list-types">
+
                         <li>{props.type}</li>
                         <li>{props.type}</li>
-                    </ul>
+                    </ul> */}
                 </div>
             </div>
         
