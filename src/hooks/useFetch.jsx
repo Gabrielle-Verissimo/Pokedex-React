@@ -7,20 +7,16 @@ const api = axios.create({
 export function useFetch() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
+    const promises = [];
     useEffect(() => {
         api.get()
             .then(response => {
-                const urls = response.data.results.map((item) => item.url);
-                const info = [];
-                // for(let i = 0; i < 10; i++) {
-                //     axios.get(urls[i])
-                //         .then(response => {
-                //             info.push(response.data)
-                //         })
-                //         .catch(e => console.log(e))
-                // } 
-                setData(info); 
+                const urls = response.data.results.map((item) => item.url);  
+                for(let i = 0; i < 10; i++) {
+                    promises.push(consumeApi(urls[i]));
+                }
+                Promise.all(promises)
+                    .then(info => setData(info))
             })
             .catch(e => console.log(e))
             .finally(() => setIsLoading(false))
@@ -29,12 +25,7 @@ export function useFetch() {
     return [data, isLoading]; 
 }
 
-function fetch(urls) {
-    const url = [];
-    for(let i = 0; i < 10; i++) {
-        url.push(urls[i]);
-    } 
-
-    console.log(url);
-
+function consumeApi(url) {
+    return fetch(url)
+        .then(res => res.json());
 }

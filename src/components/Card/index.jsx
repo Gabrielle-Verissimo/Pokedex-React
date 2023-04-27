@@ -1,8 +1,8 @@
 import './styles.css';
-let i = 0;
+import { objTypes } from '../../config/types';
+
 function Card(props) {
-    const types = props.type;
-    console.log(types);
+
     return (
 
         <>
@@ -10,17 +10,13 @@ function Card(props) {
                 <img src={props.img} alt="" />
                 <span>#{props.id}</span>
                 <h1>{props.name}</h1>
-                {/* {props.children} */}
-                <div>
+                <div className="div-types">
                     <h2>Tipo:</h2>
                     <ul id="list-types">
                         {props.type.map(type => {
-                            {i++}
                             return (
-                                // {console.log(i)}
-                                <li key={i}>{type}</li>
-                            )
-                            
+                                <li key={type} style={{ backgroundColor: setColor(type) }}>{translate(type)}</li>
+                            )   
                         })}
                     </ul>
                 </div>
@@ -31,3 +27,25 @@ function Card(props) {
 }
 
 export default Card;
+
+function translate(type) {
+    
+    let ptBr;
+    objTypes.map(item => {
+        if(item.type == type) {
+            ptBr = item.typePtbr;
+        }
+    })
+    return ptBr;
+}
+
+function setColor(type) {
+    let color;
+    objTypes.map(item => {
+        if(item.type == type) {
+            color = item.color;
+        }
+    })
+    
+    return color;
+}
