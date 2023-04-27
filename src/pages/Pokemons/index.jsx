@@ -1,17 +1,17 @@
-//import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './styles.css';
 import Card from "../../components/Card";
 import { useFetch } from '../../hooks/useFetch';
 import Tela from '../../components/Tela';
-import { useEffect, useState } from 'react';
 import { objTypes } from '../../config/types';
 const api = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
+
 function Pokemons() {
     //const [data, isLoading] = useFetch();
     const [data, setData] = useState([]);
     const [types, setTypes] = useState([]);
     const urls = [];
-    const arrTypes = [];
+    let arrTypes = [];
 
     useEffect(() => {
         fetch(api)
@@ -30,35 +30,49 @@ function Pokemons() {
                 .then(json => {
                     arr.push(json);
                     json.types.map(item => {
+                        arrTypes = [];
                         for(let key of objTypes) {
                             if(item.type.name == key.type) {
-                                arrTypes.push(key.typePtbr)
+                                arrTypes.push(key.typePtbr);
+                                
                             }
-                        } 
+                        }
+                        setTypes(arrTypes);
                     });
                     setData(arr);
-                    setTypes(arrTypes);
                 })
                 .catch(e => console.log(e));
         }
     }
 
     //data.map(item => console.log(item))
-    // for(let i = 0; i < 10; i++) {
-    //     console.log(data[i]);
-    // }
+   
     return (
         <Tela>
+            {/* {console.log('teste')} */}
             <div className="div-all">
                 {data.map(item => {
                     return (
                         <Card 
-                            key={item.id}
                             img={item.sprites.front_default}
                             id={item.id}
                             name={item.name}
-                            // type={item.types[0]}
+                            type={types}
                         >
+                            {/* <div>
+                                <h2>Tipo:</h2>
+                                <ul id="list-types">
+                                    {types.map(type => {
+                                        return (
+                                            // {console.log(i)}
+                                            <li key={item.id+type}>{type}</li>
+                                            // {i++}
+                                        )
+
+                                    })}
+                                </ul>
+                            </div> */}
+                            
                         </Card>
 
                     )

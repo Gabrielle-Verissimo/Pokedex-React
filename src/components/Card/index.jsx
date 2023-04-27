@@ -1,7 +1,8 @@
 import './styles.css';
-
+let i = 0;
 function Card(props) {
-
+    const types = props.type;
+    console.log(types);
     return (
 
         <>
@@ -9,14 +10,19 @@ function Card(props) {
                 <img src={props.img} alt="" />
                 <span>#{props.id}</span>
                 <h1>{props.name}</h1>
+                {/* {props.children} */}
                 <div>
                     <h2>Tipo:</h2>
-                    {props.children}
-                    {/* <ul id="list-types">
-
-                        <li>{props.type}</li>
-                        <li>{props.type}</li>
-                    </ul> */}
+                    <ul id="list-types">
+                        {props.type.map(type => {
+                            {i++}
+                            return (
+                                // {console.log(i)}
+                                <li key={i}>{type}</li>
+                            )
+                            
+                        })}
+                    </ul>
                 </div>
             </div>
         
