@@ -13,9 +13,9 @@
 
 </div>
 <div align="center">
-    <img src="/assets/readme/index_pc.png">
+    <img src="./readme/index_pc.png">
     <br>
-    <img src="/assets/readme/all_pc.png">
+    <img src="./readme/all_pc.png">
 </div>
 <br> <hr>
 <div align="center">

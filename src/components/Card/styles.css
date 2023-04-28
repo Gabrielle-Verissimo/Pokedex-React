@@ -50,7 +50,7 @@
 .div-types h2 {
   font-weight: bold;
   font-size: 1.2rem;
-  margin-bottom: 7px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -65,7 +65,6 @@
 
 #list-types li {
   border-radius: 10px;
-  background: green;
   padding: 2px 8px;
   color: white;
   font-weight: bold;

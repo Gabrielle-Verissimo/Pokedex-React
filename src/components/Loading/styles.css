@@ -1,0 +1,25 @@
+.pokebola {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+  }
+
+.pokebola img {
+    width: 70px;
+    animation: pokebola 20s linear infinite;
+  }
+  @keyframes pokebola {
+    0% {
+        transform: rotate(0);
+        /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+    }
+    50% {
+  
+        transform: rotate(-180deg);
+    }
+    100% {
+        transform: rotate(180deg);
+    }
+  }
