@@ -1,42 +1,3 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-const api = axios.create({
-    baseURL: 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
-});
-
-let init = 0;
-let final = 10;
-export let setShowMore;
-
-export function useFetch() {
-    const pokemon = document.querySelector('#barra-pesquisa');
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-
-    useEffect(() => {
-        if(pokemon.value != null) {
-            api.get()
-                .then(res => {
-                    res.data.results.map(item => {
-                        if(item.name == pokemon.value.toLowerCase()) {
-                            axios.get(item.url)
-                                .then(res => setData(res.data))
-                                .catch(e => console.log(e))
-                                .finally(() => setIsLoading(false))
-                        }
-                    })
-                })
-                .catch(e => console.log(e));
-        }
-        else {return}
-
-    }, [pokemon]);
-
-    return [data, isLoading];
-}
-
-
 export function useFetchAll() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -81,9 +42,4 @@ export function useFetchAll() {
     setShowMore = showMore;
 
     return [data, isLoading]; 
-}
-
-function consumeApi(url) {
-    return fetch(url)
-        .then(res => res.json());
 }

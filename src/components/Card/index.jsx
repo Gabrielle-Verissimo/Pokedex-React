@@ -1,12 +1,19 @@
 import './styles.css';
 import { objTypes } from '../../config/types';
+import { useNavigate } from 'react-router-dom';
 
 function Card(props) {
+    
+    const navegate = useNavigate();
+
+    function showInfo() {
+        navegate("/info-pokemon");
+    }
 
     return (
 
         <>
-            <div className="card" id={props.id}>
+            <div className="card" id={props.id} onClick={showInfo}>
                 <img src={props.img} alt="" />
                 <span>#{props.id}</span>
                 <h1>{props.name}</h1>
@@ -15,8 +22,8 @@ function Card(props) {
                     <ul id="list-types">
                         {props.type.map(type => {
                             return (
-                                <li key={type} style={{ backgroundColor: setColor(type) }}>{translate(type)}</li>
-                            )   
+                                <li key={`${props.id}${type}`} style={{ backgroundColor: setColor(type) }}>{translate(type)}</li>
+                            )
                         })}
                     </ul>
                 </div>
