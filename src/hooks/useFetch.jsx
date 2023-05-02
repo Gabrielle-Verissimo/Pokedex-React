@@ -8,30 +8,32 @@ let init = 0;
 let final = 10;
 export let setShowMore;
 
-export function useFetch() {
-    const pokemon = document.querySelector('#barra-pesquisa');
+export function useFetch(name) {
+    //const pokemon = document.querySelector('#barra-pesquisa');
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
+    //const name = 'combusken';
 
     useEffect(() => {
-        if(pokemon.value != null) {
-            api.get()
-                .then(res => {
-                    res.data.results.map(item => {
-                        if(item.name == pokemon.value.toLowerCase()) {
-                            axios.get(item.url)
-                                .then(res => setData(res.data))
-                                .catch(e => console.log(e))
-                                .finally(() => setIsLoading(false))
-                        }
-                    })
-                })
-                .catch(e => console.log(e));
-        }
-        else {return}
 
-    }, [pokemon]);
+        api.get()
+        .then(res => {
+            res.data.results.map(item => {
+                if(item.name == name.toLowerCase()) {
+                    axios.get(item.url)
+                        .then(res => setData(res.data))
+                        .catch(e => console.log(e))
+                        .finally(() => setIsLoading(false))
+                }
+            })
+        })
+        .catch(e => console.log(e));
+        // if(pokemon.value != null) {
+
+        // }
+        // else {return}
+
+    }, [name]);
 
     return [data, isLoading];
 }

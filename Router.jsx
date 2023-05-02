@@ -10,8 +10,8 @@ function Router() {
         <Routes>
           <Route exact path="/" element={<Home/>}/>
           <Route path="/todos-pokemons" element={<Pokemons/>}/>
-          <Route path="/info-pokemon/" element={<Info/>}/>
-          <Route path="/404" element={<NotFound/>}/>
+          <Route path="/info-pokemon" element={<Info/>}/>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
     </>      
 
