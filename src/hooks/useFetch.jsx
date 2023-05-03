@@ -9,10 +9,8 @@ let final = 10;
 export let setShowMore;
 
 export function useFetch(name) {
-    //const pokemon = document.querySelector('#barra-pesquisa');
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    //const name = 'combusken';
 
     useEffect(() => {
 

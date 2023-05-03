@@ -1,57 +1,66 @@
-#info-pokemon{
-    /* display: flex;
-    position: relative;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center; */
-    display: grid;
-    grid-template-areas:
-    'name name'
-    'img type-ability';
-    justify-content: center;
+#content-pokemon{
+    display: flex;
+    justify-content: space-around;
     align-items: center;
-    gap: 0;
+    flex-direction: column;
+    text-align: center;
+    margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
 }
 
-#info-pokemon img{
-  /* position: absolute; */
-  grid-area: img;
+#content-pokemon img{
   width: 50%;
   padding: 0;
   margin: 0;
 }
 
-#info-pokemon h1 {
-  grid-area: name;
-  width: 100%;
+#content-pokemon h1 {
+  font-size: 2.5rem;
 }
 
-#info-pokemon h1::first-letter {
+#content-pokemon h1::first-letter {
   text-transform: uppercase;
 }
 
-.type-ability {
-  grid-area: type-ability;
+#info {
   display: flex;
-  gap: 50px;
-
+  justify-content: space-between;
+  align-items: center;
 }
 
-.class-types {
-  list-style: none;
+#type-ability {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
 }
 
-.class-types h1 {
-  font-size: 1.09rem;
+#content-balao {
+  width: 70%;
+  /* background-color: white; */
+  border: solid 5px white;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-.class-abilities {
-  list-style: none;
+#content-balao p {
+  font-size: 1.2rem;
 }
 
-.class-abilities h1 {
-  font-size: 1.09rem;
+.btn-balao{
+  position: absolute;
+  background-image: url('../img/btn-balao.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 30px;
+  right: 70px;
+  bottom: 25px;
+  animation: btn-animation 0.3s infinite;
+}
+
+@keyframes btn-animation{
+  0% {bottom: 25px;}
+  100% {bottom: 28px;}
 }
