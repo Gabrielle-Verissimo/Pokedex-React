@@ -5,22 +5,34 @@ import { useMatch, useNavigate } from 'react-router-dom';
 import BtnControl from './components/BtnControl';
 import Router from '../Router';
 import { useState } from 'react';
+import BtnAllPokemons from './components/BtnAllPokemons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
+import Filter from './components/Filter';
+
+const home = <FontAwesomeIcon icon={faHome} id='icon-home'/>
+const search = <FontAwesomeIcon icon={faSearch} />
+
+
 
 export function App() {
     const [pokemonName, setPokemonName] = useState([]);
     const isAllPokemons = useMatch("/todos-pokemons");
+    const isInfoPokemon = useMatch("/info-pokemon");
+
     const navegate = useNavigate();
 
     function goToInfo() {
-        //e.preventDefault();;
         navegate("/info-pokemon", {state: {name: pokemonName}});
     }
-
 
     return (
 
         <div className="page-landing">
             <div className="top-pokedex">
+                <div>
+                    <a href="/">{home}</a>
+                </div>
                 <div className="camera">
                     <div className="reflexo"></div>
                 </div>
@@ -33,7 +45,8 @@ export function App() {
                     <input type="text" placeholder="Pesquisar o pokémon" name="pesquisa" 
                         id="barra-pesquisa" onChange={({target}) => setPokemonName(target.value)}
                     />
-                    <button type="submit" id="btn-pesquisar" className="btn" onClick={goToInfo}>Pesquisar</button>
+                    <button type="submit" id="btn-pesquisar" className="btn" onClick={goToInfo}>{search}</button>
+                    {isAllPokemons ? <Filter/> : ''}
                 </div>
                 
             </div>
@@ -46,7 +59,8 @@ export function App() {
                 <div className="retan">
                     <img src={retan} alt="/retangulo"/>
                 </div>
-                {isAllPokemons ? <BtnControl/>: ''}
+                {isAllPokemons ? <BtnControl/> : ''}
+                {isInfoPokemon ? <BtnAllPokemons/> : ''}
                 <div className="joystick">
                     <img src={joystick} alt="joystick"/>
                 </div>

@@ -22,7 +22,7 @@ function Card(props) {
                     <ul id="list-types">
                         {props.type.map(type => {
                             return (
-                                <li key={`${props.id}${type}`} style={{ backgroundColor: setColor(type) }}>{translate(type)}</li>
+                                <li key={type} style={{ backgroundColor: setColor(type) }}>{translate(type)}</li>
                             )
                         })}
                     </ul>

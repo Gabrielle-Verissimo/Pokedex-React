@@ -2,8 +2,6 @@ import { useLocation } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { useFetch } from "../../hooks/useFetch";
 import './styles.css';
-import balao from "../../assets/balao-fala.png"
-
 
 function Info() {
     const location = useLocation();
