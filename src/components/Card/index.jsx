@@ -7,7 +7,7 @@ function Card(props) {
     const navegate = useNavigate();
 
     function showInfo() {
-        navegate("/info-pokemon", {state: {name: props.name}});
+        navegate("/info-pokemon/", {state: {name: props.name}});
     }
 
     return (
