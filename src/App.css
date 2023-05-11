@@ -10,7 +10,6 @@
   list-style: none;
 }
 
-
 html {
   scroll-behavior: smooth;
 }
@@ -146,7 +145,7 @@ a{
   /* margin-top: 5vh; */
   opacity: 0.9;
 }
-#pesquisa input {
+#pesquisa input[type="text"] {
   display: flex;
   position: relative;
   align-items: center;
@@ -183,8 +182,9 @@ a{
 }
 .retan {
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  padding-left: 5vw;
 }
 .retan img {
   width: 5vh;

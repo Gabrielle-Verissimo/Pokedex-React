@@ -11,7 +11,8 @@ function Pokemons() {
             {isLoading ? <Loading/> : 
                 data.map(item => {
                     return (
-                        <Card 
+                        <Card
+                            key={item.id}
                             img={item.sprites.front_default}
                             id={item.id}
                             name={item.name}

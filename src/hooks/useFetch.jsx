@@ -55,7 +55,7 @@ export function useFetchAll() {
                 }
                 Promise.all(promises)
                     .then(info => {
-                        setData((pokemons) => [...pokemons, ...info]);
+                        setData(pokemons => [...pokemons, ...info]);
                     })
             })
             .catch(e => console.log(e))

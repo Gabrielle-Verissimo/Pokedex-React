@@ -1,7 +1,7 @@
 import './styles.css';
 import { useState } from 'react';
-import { objTypes } from '../../config/types';
 import { useNavigate } from 'react-router-dom';
+import SideBar from '../SideBar';
 
 function Filter() {
     const [checked, setChecked] = useState(false);
@@ -27,6 +27,12 @@ function Filter() {
     function chooseTypes() {
         setShowTypes(true);
         setSelectedTypes(true);
+        setChecked(true);
+    }
+
+    function closeTypes() {
+        setShowTypes(false);
+        setSelectedTypes(false); 
     }
 
     function chooseRegion() {
@@ -36,33 +42,12 @@ function Filter() {
     return (
 
         <>
-            {checked ? (
-                <div id='filter-open' onClick={close}>
-                    <ul className="responsive-menu">
-                        <li onMouseOver={chooseTypes} className={selectedTypes ? 'selected' : ''}>Por tipo</li>
-                        <li onMouseOver={chooseRegion}>Por região</li>
-                    </ul>
-                </div>
-            
-            
-            ) : 
-            (
-                <div className='btn' onClick={open}>
-                    Filtrar
-                </div>)}
-
-            {showTypes ? (
-                <div id='menu-types'>
-                    <ul className='responsive-menu'>
-                        {objTypes.map(type => {
-                            return (
-                                <li key={type} onClick={() => filterType(type.type) }>{type.typePtbr}</li>
-                            )
-                        })}
-                    </ul>
-                </div>
-            ) : ''}
-        </>
+            <div className='btn' onClick={open}>
+                Filtrar
+            </div>
+        {checked ? <SideBar close={close}/> : ''}
+    
+       </>
 
 
     )

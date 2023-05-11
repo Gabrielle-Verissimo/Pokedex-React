@@ -1,48 +1,80 @@
-export function useFetchAll() {
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [start, setStart] = useState(0);
-    const [finesh, setFinesh] = useState(10);
-    const promises = [];
-    const urls = [];
+import './styles.css';
+import { useState } from 'react';
+import { objTypes } from '../../config/types';
+import { useNavigate } from 'react-router-dom';
 
-    useEffect(() => {
+function Filter() {
+    const [checked, setChecked] = useState(false);
+    const [showTypes, setShowTypes] = useState(false);
+    const [showRegion, setShowRegion] = useState(false);
+    const [selectedTypes, setSelectedTypes] = useState(false);
+    const [type, setType] = useState([]);
+    const navegate = useNavigate();
 
-        api.get()
-            .then(response => {
-                response.data.results.map((item) => urls.push(item.url)); 
-                for(let i = start; i < finesh; i++) {
-                    promises.push(consumeApi(urls[i]));
-                }
-                Promise.all(promises)
-                    .then(info => {
-                        setData((pokemons) => [...pokemons, ...info]);
-                    })
-            })
-            .catch(e => console.log(e))
-            .finally(() => setIsLoading(false))
-        
-    }, [start, finesh]);
-
-    function showMore() {
-
-        const myInterval = setInterval(() => {
-            init = final;
-            final += 10;
-            setStart(init);
-            setFinesh(final);
-
-            if(final == 400) {
-                clearInterval(myInterval);
-            }
-
-        }, 1000);
+    function filterType(type) {
+        setType(type);
+        //navegate(`/todos-pokemons/${type}`, {state: {type: type}});
     }
 
-    setShowMore = showMore;
+    function open() {
+        setChecked(true);
+    }
 
-    return [data, isLoading]; 
+    function close() {
+        setChecked(false);
+    }
+
+    function chooseTypes() {
+        setShowTypes(true);
+        setSelectedTypes(true);
+        setChecked(true);
+    }
+
+    function closeTypes() {
+        setShowTypes(false);
+        setSelectedTypes(false); 
+    }
+
+    function chooseRegion() {
+        setShowRegion(true);
+    }
+
+    return (
+
+        <>
+            {checked ? (
+                <div id='filter-open' onClick={close}>
+                    <ul className="responsive-menu">
+                        <li onMouseEnter={chooseTypes} className={selectedTypes ? 'selected' : ''}>Por tipo</li>
+                        <li onMouseEnter={chooseRegion}>Por região</li>
+                    </ul>
+                </div>
+            
+            
+            ) : 
+            (
+                <div className='btn' onClick={open}>
+                    Filtrar
+                </div>)}
+
+            {showTypes ? (
+                <div id='menu-types' onMouseOver={() => console.log('entrou')} onMouseOut={() => setShowTypes(false)}>
+                    <ul className='responsive-menu'>
+                        {objTypes.map(item => {
+                            return (
+                                <li key={item.type} onClick={() => filterType(item.type) }>{item.typePtbr}</li>
+                            )
+                        })}
+                    </ul>
+                </div>
+            ) : ''}
+        </>
+
+
+    )
 }
+
+export default Filter;
 
                         {/* <p>
                             O acesso à fantástica habilidade Speed ​​Boost dá ao Combusken um nicho 
