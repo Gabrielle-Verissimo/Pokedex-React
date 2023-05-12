@@ -4,9 +4,57 @@ const api = axios.create({
     baseURL: 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
 });
 
+const type = axios.create({
+    baseURL: 'https://pokeapi.co/api/v2/type/'
+})
+
 let init = 0;
 let final = 10;
 export let setShowMore;
+
+function fetchAll() {
+    const names = [];
+    const urls = [];
+
+    useEffect(() => {
+        api.get()
+            .then(res => {
+                res.data.results.map((item) => names.push(item.name));
+                res.data.results.map((item) => urls.push(item.url));
+            })
+    }, [])
+
+    return [names, urls];
+}
+
+export function useType(id) {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true)
+    const urls = [];
+    const promises = [];
+    useEffect(() => {
+        if(id.length != 0) {
+            type.get(`${id}`)
+            .then(res => {
+                Object.values(res.data.pokemon).forEach(value => {
+                    urls.push(value.pokemon.url);
+                });
+                for(let i = 0; i < urls.length; i++) {
+                    promises.push(consumeApi(urls[i]));
+                }
+                Promise.all(promises)
+                    .then(info => {
+                        setData(pokemons => [...pokemons, ...info]);
+                    })
+            })
+            .catch(e => console.log(e))
+            .finally( setIsLoading(false))
+        }
+
+    }, [id])
+
+    return [data, isLoading];
+}
 
 export function useFetch(name) {
     const [data, setData] = useState([]);
@@ -26,10 +74,6 @@ export function useFetch(name) {
             })
         })
         .catch(e => console.log(e));
-        // if(pokemon.value != null) {
-
-        // }
-        // else {return}
 
     }, [name]);
 

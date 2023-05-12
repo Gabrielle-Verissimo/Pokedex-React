@@ -1,7 +1,7 @@
 import './styles.css';
 import { objTypes } from '../../config/types';
 import { useNavigate } from 'react-router-dom';
-
+import pokebola from '../../assets/pokebola.png';
 function Card(props) {
     
     const navegate = useNavigate();
@@ -14,9 +14,12 @@ function Card(props) {
 
         <>
             <div className="card" id={props.id} onClick={showInfo}>
-                <img src={props.img} alt="" />
+                {props.img == null ? <img src={pokebola} alt="" /> :<img src={props.img} alt="" />}
+                
                 <span>#{props.id}</span>
-                <h1>{props.name}</h1>
+                {props.name.length > 16 ? <h1 style={{fontSize: '1.05rem'}}>{props.name}</h1>:
+                    <h1>{props.name}</h1>
+                }
                 <div className="div-types">
                     <h2>Tipo:</h2>
                     <ul id="list-types">

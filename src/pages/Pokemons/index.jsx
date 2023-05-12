@@ -1,6 +1,6 @@
 import './styles.css';
 import Card from "../../components/Card";
-import { useFetchAll } from '../../hooks/useFetch';
+import { useFetchAll, useType } from '../../hooks/useFetch';
 import Loading from '../../components/Loading';
 
 function Pokemons() {

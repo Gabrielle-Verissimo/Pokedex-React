@@ -9,12 +9,7 @@ function Filter() {
     const [showRegion, setShowRegion] = useState(false);
     const [selectedTypes, setSelectedTypes] = useState(false);
     const [type, setType] = useState([]);
-    const navegate = useNavigate();
 
-    function filterType(type) {
-        setType(type);
-        //navegate(`/todos-pokemons/${type}`, {state: {type: type}});
-    }
 
     function open() {
         setChecked(true);
@@ -22,21 +17,6 @@ function Filter() {
 
     function close() {
         setChecked(false);
-    }
-
-    function chooseTypes() {
-        setShowTypes(true);
-        setSelectedTypes(true);
-        setChecked(true);
-    }
-
-    function closeTypes() {
-        setShowTypes(false);
-        setSelectedTypes(false); 
-    }
-
-    function chooseRegion() {
-        setShowRegion(true);
     }
 
     return (
