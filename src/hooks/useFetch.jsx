@@ -12,43 +12,43 @@ let init = 0;
 let final = 10;
 export let setShowMore;
 
-function fetchAll() {
-    const names = [];
-    const urls = [];
+// function fetchAll() {
+//     let result;
+//     function getData(data) {
+//         result = data;
+//     }
+//     api.get()
+//         .then(res => getData(res.data.results))
+//         .catch(e => console.log(e))
+//     return result;
+// }
 
-    useEffect(() => {
-        api.get()
-            .then(res => {
-                res.data.results.map((item) => names.push(item.name));
-                res.data.results.map((item) => urls.push(item.url));
-            })
-    }, [])
-
-    return [names, urls];
-}
-
-export function useType(id) {
+export function useFilter(id) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const urls = [];
     const promises = [];
     useEffect(() => {
+        console.log(id)
         if(id.length != 0) {
-            type.get(`${id}`)
-            .then(res => {
-                Object.values(res.data.pokemon).forEach(value => {
-                    urls.push(value.pokemon.url);
-                });
-                for(let i = 0; i < urls.length; i++) {
-                    promises.push(consumeApi(urls[i]));
-                }
-                Promise.all(promises)
-                    .then(info => {
-                        setData(pokemons => [...pokemons, ...info]);
-                    })
+            id.map(currentID => {
+                type.get(`${currentID}`)
+                .then(res => {
+                    Object.values(res.data.pokemon).forEach(value => {
+                        urls.push(value.pokemon.url);
+                    });
+                    for(let i = 0; i < urls.length; i++) {
+                        promises.push(consumeApi(urls[i]));
+                    }
+                    Promise.all(promises)
+                        .then(info => {
+                            setData(pokemons => [...pokemons, ...info]);
+                        })
+                })
+                .catch(e => console.log(e))
+                .finally(setIsLoading(false))
             })
-            .catch(e => console.log(e))
-            .finally( setIsLoading(false))
+
         }
 
     }, [id])
@@ -61,7 +61,6 @@ export function useFetch(name) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-
         api.get()
         .then(res => {
             res.data.results.map(item => {
