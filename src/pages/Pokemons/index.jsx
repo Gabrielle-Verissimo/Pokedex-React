@@ -10,10 +10,10 @@ import { selectIdType } from '../../redux/idTypeSlice';
 function Pokemons() {
     const [data, isLoading] = useFetchAll();
     const {id} = useSelector(selectIdType);
-    
+
     return (
         <div className="div-all">
-            {id.length !=0 ? <Filter/> :
+            {id.length != 0 ? <Filter/> :
              (
                 isLoading ? <Loading/> : 
                 data.map(item => {

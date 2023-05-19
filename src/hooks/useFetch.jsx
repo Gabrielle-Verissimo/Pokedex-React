@@ -12,42 +12,36 @@ let init = 0;
 let final = 10;
 export let setShowMore;
 
-// function fetchAll() {
-//     let result;
-//     function getData(data) {
-//         result = data;
-//     }
-//     api.get()
-//         .then(res => getData(res.data.results))
-//         .catch(e => console.log(e))
-//     return result;
-// }
-
 export function useFilter(id) {
     const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
     const urls = [];
     const promises = [];
+
+    function clear(value) {
+        if(!data.find(item => item.id == value.id)) {
+            return value;
+        }
+    }
+
     useEffect(() => {
-        console.log(id)
         if(id.length != 0) {
-            id.map(currentID => {
-                type.get(`${currentID}`)
-                .then(res => {
-                    Object.values(res.data.pokemon).forEach(value => {
-                        urls.push(value.pokemon.url);
-                    });
-                    for(let i = 0; i < urls.length; i++) {
-                        promises.push(consumeApi(urls[i]));
-                    }
-                    Promise.all(promises)
-                        .then(info => {
-                            setData(pokemons => [...pokemons, ...info]);
-                        })
-                })
-                .catch(e => console.log(e))
-                .finally(setIsLoading(false))
+            type.get(`${id}`)
+            .then(res => {
+                Object.values(res.data.pokemon).forEach(value => {
+                    urls.push(value.pokemon.url);
+                });
+                for(let i = 0; i < urls.length; i++) {
+                    promises.push(consumeApi(urls[i]));
+                }
+                Promise.all(promises)
+                    .then(info => {
+                        const clean = info.filter(clear);
+                        setData(pokemons => [...pokemons, ...clean])
+                    })
             })
+            .catch(e => console.log(e))
+            .finally(setIsLoading(false))
 
         }
 
@@ -87,6 +81,7 @@ export function useFetchAll() {
     const [finesh, setFinesh] = useState(10);
     const promises = [];
     const urls = [];
+    
 
     useEffect(() => {
 

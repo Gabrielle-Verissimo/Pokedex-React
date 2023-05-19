@@ -9,7 +9,7 @@ import Card from '../Card';
 function Filter() {
     const {id} = useSelector(selectIdType);
     const [data, isLoading] = useFilter(id);
-    //console.log('filter', id, existId);
+
     return (
         <>
             {isLoading ? <Loading/> : 
@@ -28,18 +28,6 @@ function Filter() {
             }
             
         </>
-
-    )
-    return (
-
-        <>
-            <div className='btn' onClick={open}>
-                Filtrar
-            </div>
-        {checked ? <SideBar close={close}/> : ''}
-    
-       </>
-
 
     )
 }

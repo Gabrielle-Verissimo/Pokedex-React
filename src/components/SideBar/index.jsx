@@ -32,7 +32,7 @@ function SideBar(props) {
                                 <input type="checkbox" 
                                     name={item.type} id={item.id} 
                                     className='checkbox' 
-                                    onClick={({target}) => setId((id) => [...id, target.id])} 
+                                    onClick={({target}) => setId(target.id)} 
                                 />
                                 <label htmlFor={item.id}>{item.typePtbr}</label>
                             </li>
